@@ -1,0 +1,37 @@
+{
+	"driver_id": "uc_dunehd_driver",
+	"version": "0.1.0",
+	"min_core_api": "0.7.0",
+	"name": { "en": "Dune-HD" },
+	"icon": "uc:integration",
+	"description": {
+		"en": "Control your Dune-HD device with Remote Two."
+	},
+	"developer": {
+		"name": "Peter Verhage",
+		"email": "peter@no-nonsense.org",
+		"url": "https://github.com/petercv"
+	},
+	"home_page": "https://github.com/petercv/integration-dunehd",
+	"setup_data_schema": {
+		"title": {
+			"en": "Integration setup"
+		},
+		"settings": [
+			{
+				"id": "info",
+				"label": {
+					"en": "Setup process"
+				},
+				"field": {
+					"label": {
+						"value": {
+							"en": "The integration will discover your Dune-HD device on your network."
+						}
+					}
+				}
+			}
+		]
+	},
+	"release_date": "2024-03-31"
+}
