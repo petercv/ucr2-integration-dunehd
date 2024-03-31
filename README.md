@@ -2,9 +2,9 @@
 
 Using [uc-integration-api](https://github.com/aitatoi/integration-python-library)
 
-The driver discovers Apple TV devices on the network and pairs them using AirPlay and companion protocols.
-A [media player entity](https://github.com/unfoldedcircle/core-api/blob/main/doc/entities/entity_media_player.md)
-is exposed to the Remote Two.
+The driver lets you enter the IP address of a Dune-HD device and exposes a
+[media player entity](https://github.com/unfoldedcircle/core-api/blob/main/doc/entities/entity_media_player.md)
+to the Remote Two.
 
 Supported attributes:
 - State (on, standby, playing, paused, seeking, buffering, unknown)
@@ -50,44 +50,11 @@ in the Python integration library to control certain runtime features like liste
 The configuration file is loaded & saved from the path specified in the environment variable `UC_CONFIG_HOME`.
 Otherwise, the `HOME` path is used or the working directory as fallback.
 
-## Build self-contained binary
+## Build Docker image
 
-After some tests, turns out python stuff on embedded is a nightmare. So we're better off creating a single binary file
-that has everything in it.
-
-To do that, we need to compile it on the target architecture as `pyinstaller` does not support cross compilation.
-
-### x86-64 Linux
-
-On x86-64 Linux we need Qemu to emulate the aarch64 target platform:
-```bash
-sudo apt install qemu binfmt-support qemu-user-static
-docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
-```
-
-Run pyinstaller:
+Simply run:
 ```shell
-docker run --rm --name builder \
-    --platform=aarch64 \
-    --user=$(id -u):$(id -g) \
-    -v "$PWD":/workspace \
-    docker.io/unfoldedcircle/r2-pyinstaller:3.11.6  \
-    bash -c \
-      "python -m pip install -r requirements.txt && \
-      pyinstaller --clean --onefile --name intg-dunehd intg-dunehd/driver.py"
-```
-
-### aarch64 Linux / Mac
-
-On an aarch64 host platform, the build image can be run directly (and much faster):
-```shell
-docker run --rm --name builder \
-    --user=$(id -u):$(id -g) \
-    -v "$PWD":/workspace \
-    docker.io/unfoldedcircle/r2-pyinstaller:3.11.6  \
-    bash -c \
-      "python -m pip install -r requirements.txt && \
-      pyinstaller --clean --onefile --name intg-dunehd intg-dunehd/driver.py"
+docker build .
 ```
 
 ## Versioning
