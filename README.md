@@ -65,7 +65,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## Changelog
 
 The major changes found in each new release are listed in the [changelog](CHANGELOG.md)
-and under the GitHub [releases](https://github.com/unfoldedcircle/integration-appletv/releases).
+and under the GitHub [releases](https://github.com/petercv/ucr2-integration-dunehd/releases).
 
 ## License
 
