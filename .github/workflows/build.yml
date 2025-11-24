@@ -11,7 +11,7 @@ env:
 jobs:
   build:
     name: Build on-device package
-    runs-on: [ubuntu-latest, ARM64]
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
