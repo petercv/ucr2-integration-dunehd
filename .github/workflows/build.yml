@@ -1,11 +1,75 @@
-name: Publish Docker image
+name: Build release
 
 on:
   release:
     types: [published]
 
+env:
+  # Python version to use in the builder image. See https://hub.docker.com/r/unfoldedcircle/r2-pyinstaller for possible versions.
+  PYTHON_VER: 3.11.13-0.4.0    
+
 jobs:
-  push_to_registry:
+  build:
+    name: Build on-device package
+    runs-on: [ubuntu-latest, ARM64]
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Fetch all tags to determine version
+        run: |
+          git fetch origin +refs/tags/*:refs/tags/*
+          echo "VERSION=$(git describe --match "v[0-9]*" --tags HEAD --always)" >> $GITHUB_ENV
+
+      - name: Verify driver.json version for release build
+        if: contains(github.ref, 'tags/v')
+        run: |
+          DRIVER_VERSION="v$(jq .version -r driver.json)"
+          if [ "${{ env.VERSION }}" != "$DRIVER_VERSION" ]; then
+            echo "Version in driver.json ($DRIVER_VERSION) doesn't match git version tag (${{ env.VERSION }})!"
+            exit 1
+          fi          
+
+      - name: Build for aarch64
+        run: |
+          echo "Starting pyinstaller build"
+          docker run --rm --name builder \
+            --platform=aarch64 \
+            --user=$(id -u):$(id -g) \
+            -v ${GITHUB_WORKSPACE}:/workspace \
+            docker.io/unfoldedcircle/r2-pyinstaller:${PYTHON_VER} \
+            bash -c \
+              "python -m pip install -r requirements.txt && \
+              pyinstaller --collect-submodules zeroconf --clean --onedir --name driver intg-dunehd/driver.py"
+
+      - name: Add version
+        run: |
+          mkdir -p artifacts/bin
+          cd artifacts
+          echo ${{ env.VERSION }} > version.txt
+          
+      - name: Prepare artifacts
+        shell: bash
+        run: |
+          cp -r dist/driver/* artifacts/bin
+          cp driver.json artifacts/
+          echo "ARTIFACT_NAME=uc-intg-dunehd-${{ env.VERSION }}-aarch64" >> $GITHUB_ENV
+          
+      - name: Create upload artifact
+        shell: bash
+        run: | 
+          tar czvf ${{ env.ARTIFACT_NAME }}.tar.gz -C ${GITHUB_WORKSPACE}/artifacts .
+          ls -lah
+          
+      - uses: actions/upload-artifact@v4
+        id: upload_artifact
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: ${{ env.ARTIFACT_NAME }}.tar.gz
+          if-no-files-found: error
+          retention-days: 3      
+
+  docker:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
