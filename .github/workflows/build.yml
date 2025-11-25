@@ -137,12 +137,20 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
+      - name: Set Docker image tag
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            echo "DOCKER_IMAGE_TAG=${{ env.VERSION }}" >> $GITHUB_ENV
+          else
+            echo "DOCKER_IMAGE_TAG=latest" >> $GITHUB_ENV
+          fi
+
       - name: Build and push Docker image to Docker Hub
         uses: docker/build-push-action@v6
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ env.DOCKER_IMAGE_NAME }}${{ contains(github.ref, 'tags/v') && format(':{0}', env.VERSION) || ':latest' }}          
+          tags: "${{ env.DOCKER_IMAGE_NAME }}:${{ env.DOCKER_IMAGE_TAG }}"
 
   release:
     name: Create GitHub release
@@ -156,7 +164,6 @@ jobs:
         uses: actions/download-artifact@v4
 
       - name: Extract build archives from downloaded files
-        if: "!contains(github.ref, 'tags/v')"
         run: |
           ls -R
           # extract tar.gz build archives from downloaded artifacts
@@ -169,6 +176,7 @@ jobs:
 
       # Use a common timestamp for all matrix build artifacts
       - name: Get timestamp
+        if: "!contains(github.ref, 'tags/v')"
         run: |
           echo "TIMESTAMP=$(date +"%Y%m%d_%H%M%S")" >> $GITHUB_ENV
 
@@ -195,7 +203,7 @@ jobs:
       - name: Create GitHub release archives
         if: "contains(github.ref, 'tags/v')"
         run: |
-          for filename in *.tar.gz; do echo "sha256  `sha256sum $filename`" >> ${{ env.HASH_FILENAME }}; done;
+          for filename in *.tar.gz; do echo "sha256 `sha256sum $filename`" >> ${{ env.HASH_FILENAME }}; done;
 
       - name: Create Release
         uses: "marvinpinto/action-automatic-releases@latest"
