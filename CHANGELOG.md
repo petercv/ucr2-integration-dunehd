@@ -11,10 +11,6 @@ _Changes in the next release_
 
 ---
 
-## v0.2.1 - 2025-11-25
-### Changed
-- Fixed Docker image push
-
 ## v0.2.0 - 2025-11-25
 ### Added
 - Support for on-device installation.
