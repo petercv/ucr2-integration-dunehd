@@ -12,11 +12,12 @@ from asyncio import AbstractEventLoop
 from enum import Enum, IntEnum
 from typing import Any
 
-import dunehd
-from config import DuneHDDeviceConfig
-from pyee import AsyncIOEventEmitter
+from pyee.asyncio import AsyncIOEventEmitter
 from ucapi import MediaPlayer, StatusCodes, media_player
 from ucapi.media_player import Attributes, Commands, States
+
+import dunehd
+from config import DuneHDDeviceConfig
 
 
 class SimpleCommands(str, Enum):
@@ -33,7 +34,12 @@ BACKOFF_SEC = 2
 
 POLL_INTERVAL = 1
 
-EMPTY_IMAGE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABNJREFUCB1jZGBg+A/EDEwgAgQADigBA//q6GsAAAAASUVORK5CYII%3D"  # pylint: disable=line-too-long
+EMPTY_IMAGE = (
+    "data:image/png;base64,"
+    "iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0k"
+    "AAAAAXNSR0IArs4c6QAAAAlwSFlzAAAWJQAAFiUBSVIk8AAAABNJREFUCB1jZGBg+A/"
+    "EDEwgAgQADigBA//q6GsAAAAASUVORK5CYII%3D"
+)
 
 FEATURES = [
     media_player.Features.ON_OFF,

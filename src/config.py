@@ -154,4 +154,5 @@ class Devices:
         return False
 
 
+# pylint: disable=C0103
 devices: Devices | None = None

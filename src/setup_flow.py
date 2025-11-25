@@ -9,9 +9,6 @@ import asyncio
 import logging
 from enum import IntEnum
 
-import config
-import dunehd
-from config import DuneHDDeviceConfig
 from ucapi import (
     AbortDriverSetup,
     DriverSetupRequest,
@@ -23,6 +20,10 @@ from ucapi import (
     SetupError,
     UserDataResponse,
 )
+
+import config
+import dunehd
+from config import DuneHDDeviceConfig
 
 _LOG = logging.getLogger(__name__)
 

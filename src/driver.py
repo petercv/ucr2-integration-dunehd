@@ -11,12 +11,13 @@ import logging
 import os
 from typing import Any
 
-import config
-import setup_flow
 import ucapi
 import ucapi.api as uc
-from device import EVENTS, DuneHDDevice
 from ucapi import media_player
+
+import config
+import setup_flow
+from device import EVENTS, DuneHDDevice
 
 _LOG = logging.getLogger("driver")  # avoid having __main__ in log messages
 _LOOP = asyncio.get_event_loop()
