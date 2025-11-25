@@ -1,4 +1,4 @@
-# Dune-HD integration for Remote Two Changelog
+# Dune-HD integration for Remote Two / 3 Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -10,6 +10,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 _Changes in the next release_
 
 ---
+
+## v0.2.0 - 2025-11-25
+### Added
+- Support for on-device installation.
 
 ## v0.1.0 - 2024-03-31
 ### Added

@@ -1,4 +1,4 @@
-# Dune-HD integration for Remote Two
+# Dune-HD integration for Remote Two / 3
 
 Using [uc-integration-api](https://github.com/aitatoi/integration-python-library)
 
@@ -41,7 +41,7 @@ pip3 install -r requirements.txt
 ### Run
 
 ```shell
-python3 intg-dunehd/driver.py
+python3 src/driver.py
 ```
 
 See available [environment variables](https://github.com/unfoldedcircle/integration-python-library#environment-variables)

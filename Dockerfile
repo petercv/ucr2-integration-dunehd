@@ -16,4 +16,4 @@ ENV UC_INTEGRATION_HTTP_PORT="9090"
 
 ENV UC_CONFIG_HOME="/config"
 
-CMD ["python3", "-u", "intg-dunehd/driver.py"]
+CMD ["python3", "-u", "src/driver.py"]
