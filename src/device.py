@@ -68,6 +68,7 @@ FEATURES = [
     media_player.Features.INFO,
     media_player.Features.AUDIO_TRACK,
     media_player.Features.SUBTITLE,
+    media_player.Features.COLOR_BUTTONS
 ]
 
 
@@ -230,6 +231,14 @@ class DuneHDDevice:
                 status = await self._client.send_ir_code(dunehd.IrCode.AUDIO)
             elif cmd_id == Commands.SUBTITLE:
                 status = await self._client.send_ir_code(dunehd.IrCode.SUBTITLE)
+            elif cmd_id == Commands.FUNCTION_BLUE:
+                status = await self._client.send_ir_code(dunehd.IrCode.A)
+            elif cmd_id == Commands.FUNCTION_GREEN:
+                status = await self._client.send_ir_code(dunehd.IrCode.B)
+            elif cmd_id == Commands.FUNCTION_RED:
+                status = await self._client.send_ir_code(dunehd.IrCode.C)
+            elif cmd_id == Commands.FUNCTION_YELLOW:
+                status = await self._client.send_ir_code(dunehd.IrCode.D)
             elif cmd_id == SimpleCommands.BLACK_SCREEN:
                 status = await self._client.send_command(dunehd.Command.BLACK_SCREEN)
             elif cmd_id == SimpleCommands.MAIN_SCREEN:
