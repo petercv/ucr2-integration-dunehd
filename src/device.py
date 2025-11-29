@@ -68,7 +68,7 @@ FEATURES = [
     media_player.Features.INFO,
     media_player.Features.AUDIO_TRACK,
     media_player.Features.SUBTITLE,
-    media_player.Features.COLOR_BUTTONS
+    media_player.Features.COLOR_BUTTONS,
 ]
 
 

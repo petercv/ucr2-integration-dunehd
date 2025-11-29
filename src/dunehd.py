@@ -61,10 +61,10 @@ class IrCode(Enum):
     POWER = "43BC"
     POWER_ON = "5FA0"
     POWER_OFF = "5EA1"
-    A = "40BF" # RED
-    B = "1FE0" # GREEN
-    C = "00FF" # YELLOW
-    D = "41BE" # BLUE
+    A = "40BF"  # RED
+    B = "1FE0"  # GREEN
+    C = "00FF"  # YELLOW
+    D = "41BE"  # BLUE
     DIGIT_1 = "0BF4"
     DIGIT_2 = "0CF3"
     DIGIT_3 = "0DF2"
