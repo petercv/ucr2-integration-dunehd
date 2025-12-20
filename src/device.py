@@ -232,13 +232,13 @@ class DuneHDDevice:
             elif cmd_id == Commands.SUBTITLE:
                 status = await self._client.send_ir_code(dunehd.IrCode.SUBTITLE)
             elif cmd_id == Commands.FUNCTION_BLUE:
-                status = await self._client.send_ir_code(dunehd.IrCode.A)
+                status = await self._client.send_ir_code(dunehd.IrCode.BLUE)
             elif cmd_id == Commands.FUNCTION_GREEN:
-                status = await self._client.send_ir_code(dunehd.IrCode.B)
+                status = await self._client.send_ir_code(dunehd.IrCode.GREEN)
             elif cmd_id == Commands.FUNCTION_RED:
-                status = await self._client.send_ir_code(dunehd.IrCode.C)
+                status = await self._client.send_ir_code(dunehd.IrCode.RED)
             elif cmd_id == Commands.FUNCTION_YELLOW:
-                status = await self._client.send_ir_code(dunehd.IrCode.D)
+                status = await self._client.send_ir_code(dunehd.IrCode.YELLOW)
             elif cmd_id == SimpleCommands.BLACK_SCREEN:
                 status = await self._client.send_command(dunehd.Command.BLACK_SCREEN)
             elif cmd_id == SimpleCommands.MAIN_SCREEN:

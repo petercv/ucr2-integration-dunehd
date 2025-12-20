@@ -11,6 +11,14 @@ _Changes in the next release_
 
 ---
 
+## v0.2.2 - 2025-12-20
+### Changed
+- Fixed color button mapping
+
+## v0.2.1 - 2025-11-29
+### Added
+- Support color buttons
+
 ## v0.2.0 - 2025-11-25
 ### Added
 - Support for on-device installation.

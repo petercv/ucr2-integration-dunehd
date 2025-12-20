@@ -65,6 +65,10 @@ class IrCode(Enum):
     B = "1FE0"  # GREEN
     C = "00FF"  # YELLOW
     D = "41BE"  # BLUE
+    RED = A
+    GREEN = B
+    YELLOW = C
+    BLUE = D
     DIGIT_1 = "0BF4"
     DIGIT_2 = "0CF3"
     DIGIT_3 = "0DF2"

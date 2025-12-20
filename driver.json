@@ -1,6 +1,6 @@
 {
   "driver_id": "ucr2_dunehd_driver",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "min_core_api": "0.7.1",
   "name": { "en": "Dune-HD" },
   "icon": "uc:integration",
@@ -33,5 +33,5 @@
       }
     ]
   },
-  "release_date": "2025-11-25"
+  "release_date": "2025-12-20"
 }
